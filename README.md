@@ -23,6 +23,4 @@ Import the widget to your project and add the Bootstrap Tooltip on a page. Confi
 * *Message* A hardcoded message  - visible within the tooltip when an attribute is not defined.
 * *Tooltip Location* The location of the tooltip relative to the field. Values: top, left, bottom, right
 * *Tooltip mode* When to show the tooltip. Values: On hover, On click
-* *Message entity* The entity that contains the text attribute to show in the tooltip.
-* *Message entity Constraint* The XPath constraint on the entity. Please make sure that this restricts the amount to one object
-* *Message Attribute* The attribute to use for the message visible within the tooltip.
+* *Tooltip Microflow* Return value: the text attribute to show in the tooltip.
