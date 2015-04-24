@@ -29,7 +29,7 @@ require({
             name: 'tooltip',
             location: '../../widgets/BootstrapTooltip/lib',
             main: 'tooltip'
-    }]
+               }]
 }, [
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 'dijit/_TemplatedMixin',
     'mxui/dom', 'dojo/dom', 'dojo/query', 'dojo/dom-prop', 'dojo/dom-geometry', 'dojo/dom-class', 'dojo/dom-style', 'dojo/dom-construct', 'dojo/_base/array', 'dojo/_base/lang', 'dojo/text', 'dojo/html', 'dojo/_base/event',
@@ -44,9 +44,7 @@ require({
 
         // Parameters configured in the Modeler.
         tooltipClassName: '',
-        tooltipMessageAttribute: '',
-        tooltipMessageEntity: '',
-        tooltipEntityConstraint: '',
+        tooltipMessageMicroflow: '',
         tooltipMessageString: '',
         tooltipLocation: 'top',
         tooltipMode: 'hover',
@@ -63,9 +61,9 @@ require({
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
             console.log(this.id + '.postCreate');
-            if(this.tooltipMode === 'hover') {
+            if (this.tooltipMode === 'hover') {
                 this._tooltipTrigger = 'hover focus';
-            } else if(this.tooltipMode === 'click') {
+            } else if (this.tooltipMode === 'click') {
                 this._tooltipTrigger = 'click';
             }
         },
@@ -73,31 +71,20 @@ require({
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
         update: function (obj, callback) {
             console.log(this.id + '.update');
-            var xpath = '//' + this.tooltipMessageEntity + this.tooltipEntityConstraint,
-                cb = function (objs) {
-                    if (objs[0]) {
-                        this._tooltipText = objs[0].get(this.tooltipMessageAttribute);
-                    } else {
-                        console.warn('No objs found!.');
-                    }
-                    this._initializeTooltip();
 
-                };
-            if (this.tooltipMessageAttribute !== '') {
-                if (obj) {
-                    xpath = xpath.replace('[%CurrentObject%]', obj.getGuid());
-                    mx.data.get({
-                        xpath: xpath,
-                        callback: lang.hitch(this, cb)
-                    });
-                } else if (!obj && (xpath.indexOf('[%CurrentObject%]') > -1)) {
-                    console.warn('No context for xpath, not fetching.');
-                } else {
-                    mx.data.get({
-                        xpath: xpath,
-                        callback: lang.hitch(this, cb)
-                    });
-                }
+            if (this.tooltipMessageMicroflow !== '') {
+                mx.data.action({
+                    params: {
+                        actionname: this.tooltipMessageMicroflow
+                    },
+                    callback: lang.hitch(this, function (string) {
+                        this._tooltipText = string;
+                        this._initializeTooltip();
+                    }),
+                    error: lang.hitch(this, function (error) {
+                        console.warn('Error executing Microflow: ' + error);
+                    })
+                }, this);
             } else if (this.tooltipMessageString !== '') {
                 this._tooltipText = this.tooltipMessageString;
                 this._initializeTooltip();

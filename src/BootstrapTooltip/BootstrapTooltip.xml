@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="BootstrapTooltip.widget.BootstrapTooltip" needsEntityContext="false" xmlns="http://www.mendix.com/widget/1.0/">
     <name>BootstrapTooltip</name>
-    <description>The description of this widget.</description>
+    <description></description>
 
     <icon></icon>
 
@@ -14,7 +14,7 @@
         <property key="tooltipMessageString" type="string" required="false">
             <caption>Message</caption>
             <category>Data source</category>
-            <description>The message visible within the tooltip.</description>
+            <description>The hardcoded message visible within the tooltip when no data source microflow is defined.</description>
         </property>
         <property key="tooltipLocation" type="enumeration" defaultValue="top">
             <caption>Tooltip Location</caption>
@@ -36,23 +36,11 @@
                 <enumerationValue key="click">On click</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="tooltipMessageEntity" type="entity" required="false">
-            <caption>Message entity</caption>
+        <property key="tooltipMessageMicroflow" type="microflow" required="false">
+            <caption>Tooltip Message Microflow</caption>
             <category>Data source</category>
-            <description>The entity that contains the text attribute to show in the tooltip.</description>
-        </property>
-        <property key="tooltipEntityConstraint" type="entityConstraint" entityProperty="tooltipMessageEntity" required="false">
-            <caption>Message entity Constraint</caption>
-            <category>Data source</category>
-            <description>The XPath constraint on the entity. Please make sure that this restricts the amount to one object</description> 
-        </property>
-        <property key="tooltipMessageAttribute" type="attribute" required="false" entityProperty="tooltipMessageEntity" isPath="no">
-            <caption>Message Attribute</caption>
-            <category>Data source</category>
-            <description>The attribute to use for the message visible within the tooltip.</description>
-            <attributeTypes>
-                <attributeType name="String" />
-            </attributeTypes>
+            <description>Return value: the message visible within the tooltip.</description>
+            <returnType type="String" />
         </property>
     </properties>
 </widget>
