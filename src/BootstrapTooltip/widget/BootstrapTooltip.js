@@ -50,7 +50,7 @@ define([
 
 		// dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
 		postCreate: function () {
-			console.log(this.id + ".postCreate");
+
 			if (this.tooltipMode === "hover") {
 				this._tooltipTrigger = "hover focus";
 			} else if (this.tooltipMode === "click") {
@@ -60,7 +60,6 @@ define([
 
 		// mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
 		update: function (obj, callback) {
-			console.log(this.id + ".update");
 
 			if (this.tooltipMessageMicroflow !== "") {
 				mx.data.action({
@@ -90,7 +89,7 @@ define([
 			// Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
 		},
 		_initializeTooltip: function () {
-			console.log(this.id + "._initializeTooltip");
+
 			$("." + this.tooltipClassName).tooltip({
 				title: this._tooltipText,
 				placement: this.tooltipLocation,
