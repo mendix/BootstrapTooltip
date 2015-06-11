@@ -16,6 +16,11 @@
             <category>Data source</category>
             <description>The hardcoded message visible within the tooltip when no data source microflow is defined.</description>
         </property>
+		<property key="tooltipRenderHTML" type="boolean" defaultValue="false">
+			<caption>Render HTML</caption>
+			<category>Appearance</category>
+			<description>Renders the tooltip content as HTML</description>
+		</property>
         <property key="tooltipLocation" type="enumeration" defaultValue="top">
             <caption>Tooltip Location</caption>
             <category>Appearance</category>
