@@ -18,10 +18,20 @@
 */
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
-define([
+require({
+    packages: [{
+        name: 'jqwrapper',
+        location: '../../widgets/BootstrapTooltip/lib',
+        main: 'jqwrapper'
+ }, {
+        name: 'tooltip',
+        location: '../../widgets/BootstrapTooltip/lib',
+        main: 'tooltip'
+ }]
+}, [
 	"dojo/_base/declare", "mxui/widget/_WidgetBase", "dijit/_TemplatedMixin",
 	"mxui/dom", "dojo/_base/lang",
-	"BootstrapTooltip/lib/jqwrapper", "BootstrapTooltip/lib/tooltip", "dojo/text!BootstrapTooltip/widget/template/BootstrapTooltip.html"
+	"jqwrapper", "tooltip", "dojo/text!BootstrapTooltip/widget/template/BootstrapTooltip.html"
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, lang, $, tooltip, widgetTemplate) {
 	"use strict";
 
