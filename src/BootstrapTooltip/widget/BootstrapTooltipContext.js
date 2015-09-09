@@ -101,8 +101,7 @@ require({
 			// Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
 		},
 		_initializeTooltip: function () {
-
-			$("." + this.tooltipClassName).tooltip({
+			$(this.domNode).siblings("." +this.tooltipClassName).tooltip({
 				title: this._tooltipText,
 				placement: this.tooltipLocation,
 				trigger: this._tooltipTrigger,
