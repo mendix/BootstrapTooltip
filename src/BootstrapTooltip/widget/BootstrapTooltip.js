@@ -1,33 +1,7 @@
 /*jslint white:true, nomen: true, plusplus: true */
 /*global mx, define, require, browser, devel, console, document */
 /*mendix */
-/*
-    BootstrapTooltip
-    ========================
-    @file      : BootstrapTooltip.js
-    @version   : 2.2
-    @author    : Pauline Oudeman
-    @date      : Tue, 21 Apr 2015 08:16:44 GMT
-	@copyright : Mendix Technology BV
-	@license   : Apache License, Version 2.0, January 2004
 
-
-    Documentation
-    ========================
-    Describe your widget here.
-*/
-
-// Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
-// require({
-//     packages: [{
-//         name: 'jqwrapper',
-//         location: '../../widgets/BootstrapTooltip/lib',
-//         main: 'jqwrapper'
-//  }, {
-//         name: 'tooltip',
-//         location: '../../widgets/BootstrapTooltip/lib',
-//         main: 'tooltip'
-//  }]
 define([
 	"dojo/_base/declare",
 	"mxui/widget/_WidgetBase",

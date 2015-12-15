@@ -1,21 +1,6 @@
 /*jslint white:true, nomen: true, plusplus: true */
 /*global mx, define, require, browser, devel, console, document */
 /*mendix */
-/*
-    BootstrapTooltip
-    ========================
-    @file      : BootstrapTooltipContext.js
-    @version   : 1.0
-    @author    : Pauline Oudeman
-    @date      : Tue, 21 Apr 2015 08:16:44 GMT
-	@copyright : Mendix Technology BV
-	@license   : Apache License, Version 2.0, January 2004
-
-
-    Documentation
-    ========================
-    This file extends BootstrapTooltip.js to allow for a context entity. Edited by Eric Tieniber, 09.08.2015
-*/
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
 require([
