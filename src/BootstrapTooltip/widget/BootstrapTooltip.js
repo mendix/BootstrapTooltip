@@ -5,7 +5,7 @@
     BootstrapTooltip
     ========================
     @file      : BootstrapTooltip.js
-    @version   : 1.0
+    @version   : 2.2
     @author    : Pauline Oudeman
     @date      : Tue, 21 Apr 2015 08:16:44 GMT
 	@copyright : Mendix Technology BV
@@ -18,21 +18,26 @@
 */
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
-require({
-    packages: [{
-        name: 'jqwrapper',
-        location: '../../widgets/BootstrapTooltip/lib',
-        main: 'jqwrapper'
- }, {
-        name: 'tooltip',
-        location: '../../widgets/BootstrapTooltip/lib',
-        main: 'tooltip'
- }]
-}, [
-	"dojo/_base/declare", "mxui/widget/_WidgetBase", "dijit/_TemplatedMixin",
-	"mxui/dom", "dojo/_base/lang",
-	"jqwrapper", "tooltip", "dojo/text!BootstrapTooltip/widget/template/BootstrapTooltip.html"
-], function (declare, _WidgetBase, _TemplatedMixin, dom, lang, $, tooltip, widgetTemplate) {
+// require({
+//     packages: [{
+//         name: 'jqwrapper',
+//         location: '../../widgets/BootstrapTooltip/lib',
+//         main: 'jqwrapper'
+//  }, {
+//         name: 'tooltip',
+//         location: '../../widgets/BootstrapTooltip/lib',
+//         main: 'tooltip'
+//  }]
+define([
+	"dojo/_base/declare",
+	"mxui/widget/_WidgetBase",
+	"dijit/_TemplatedMixin",
+	"mxui/dom",
+	"dojo/_base/lang",
+	"BootstrapTooltip/lib/jquery",
+	"BootstrapTooltip/lib/tooltip",
+	"dojo/text!BootstrapTooltip/widget/template/BootstrapTooltip.html"
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojolang, $, tooltip, widgetTemplate) {
 	"use strict";
 
 	$ = tooltip.createInstance($);
@@ -53,11 +58,6 @@ require({
 		_tooltipText: "No custom text specified for this tooltip",
 		_tooltipTrigger: null,
 
-		// dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
-		constructor: function () {
-
-		},
-
 		// dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
 		postCreate: function () {
 
@@ -76,11 +76,11 @@ require({
 					params: {
 						actionname: this.tooltipMessageMicroflow
 					},
-					callback: lang.hitch(this, function (string) {
+					callback: dojolang.hitch(this, function (string) {
 						this._tooltipText = string;
 						this._initializeTooltip();
 					}),
-					error: lang.hitch(this, function (error) {
+					error: dojolang.hitch(this, function (error) {
 						console.warn("Error executing Microflow: " + error);
 					})
 				}, this);
@@ -94,13 +94,20 @@ require({
 			callback();
 		},
 
-		// mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
-		uninitialize: function () {
-			// Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
-		},
 		_initializeTooltip: function () {
-
-			$("." + this.tooltipClassName).tooltip({
+			
+			var $targetElement = $(this.domNode).siblings("." +this.tooltipClassName);
+			
+			if($targetElement.length===0) {
+				console.warn("Did you configure BootstrapTooltip widget correctly? Couldn't find an element with class '"+ this.tooltipClassName +"' on same level as widget (id='" + this.domNode.id+"')" )
+			}
+			
+			//if the element is a label+input combination, find the input element.
+			if ($targetElement.hasClass("form-group")){
+				$targetElement = $targetElement.find(".form-control").length !== 0 ? $targetElement.find(".form-control") : $targetElement.find("input");
+			}			
+			
+			$targetElement.tooltip({
 				title: this._tooltipText,
 				placement: this.tooltipLocation,
 				trigger: this._tooltipTrigger,
