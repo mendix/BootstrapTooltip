@@ -36,7 +36,9 @@ define([
 		postCreate: function () {
 
 			if (this.tooltipMode === "hover") {
-				this._tooltipTrigger = "hover focus";
+				this._tooltipTrigger = "focus hover";
+			} else if (this.tooltipMode === "focus") {
+				this._tooltipTrigger = "focus";
 			} else if (this.tooltipMode === "click") {
 				this._tooltipTrigger = "click";
 			}
@@ -70,7 +72,13 @@ define([
 
 		_initializeTooltip: function () {
 			
+			// Find element by classname in the same container (DOM level) as widget
 			var $targetElement = $(this.domNode).siblings("." +this.tooltipClassName);
+			
+			// No element found on same level, try to find target element on page
+			if($targetElement.length===0) {
+				$targetElement = $("." + this.tooltipClassName);
+			}
 			
 			if($targetElement.length===0) {
 				console.warn("Did you configure BootstrapTooltip widget correctly? Couldn't find an element with class '"+ this.tooltipClassName +"' on same level as widget (id='" + this.domNode.id+"')" )

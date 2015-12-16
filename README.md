@@ -1,5 +1,4 @@
 # Bootstrap Tooltip
-
 This widget adds a tooltip to a user defined field, containing for example help text or extra information.
 
 ## Contributing
@@ -7,11 +6,17 @@ For more information on contributing to this repository visit [Contributing to a
 
 ## Typical usage scenario
  
-Add helptext to an inputfield.
+Add helptext to an inputfield on focus.
+Informative text for buttons on hover.
 
 ## Installation
 
-Import the widget to your project and add the Bootstrap Tooltip on a page. Configure the properties to determine how the widget will behave in your application.
+Import the widget to your project and add the Bootstrap Tooltip on a page. 
+
+## Configuration
+Configure the properties to determine how the widget will behave in your application.
+
+Tip: Locate the widget as close to the target element as possible. (Preferably next to it)
 
 ## Features and limitations
  
@@ -19,8 +24,8 @@ Import the widget to your project and add the Bootstrap Tooltip on a page. Confi
 
 ## Properties
 
-* *Tooltip classname* The class name of the field to attach the tooltip to. 
-* *Message* A hardcoded message  - visible within the tooltip when an attribute is not defined.
-* *Tooltip Location* The location of the tooltip relative to the field. Values: top, left, bottom, right
+* *Target element classname* The class name of the field to attach the tooltip to. 
+* *Default text* Text being displayed when no data source microflow is defined.
+* *Tooltip position* The location of the tooltip relative to the field. Values: top, left, bottom, right
 * *Tooltip mode* When to show the tooltip. Values: On hover, On click
-* *Tooltip Microflow* Return value: the text attribute to show in the tooltip.
+* *Tooltip source microflow* Return value: Text to display in tooltip.

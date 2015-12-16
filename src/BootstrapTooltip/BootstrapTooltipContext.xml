@@ -37,7 +37,8 @@
             <category>Appearance</category>
             <description>When to show the tooltip.</description>
             <enumerationValues>
-                <enumerationValue key="hover">On hover</enumerationValue>
+                <enumerationValue key="hover">On hover, focus</enumerationValue>
+                <enumerationValue key="focus">On focus</enumerationValue>
                 <enumerationValue key="click">On click</enumerationValue>
             </enumerationValues>
         </property>
