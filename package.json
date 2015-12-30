@@ -1,7 +1,7 @@
 {
   "name": "BootstrapTooltip",
   "version": "2.1.0",
-  "description": "This widget adds a tooltip to a user defined field, containing for example help text or extra information.",
+  "description": "",
   "private": true,
   "dependencies": {
   },
@@ -15,11 +15,12 @@
     "node-base64-image": "^0.1.0",
     "shelljs": "^0.5.3",
     "xml2js": "^0.4.15",
+    "semver": "^5.1.0",
     "node-mendix-modeler-path": "https://github.com/JelteMX/node-mendix-modeler-path/archive/v1.0.0.tar.gz"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "http://github.com/mendix/BootstrapTooltip"
   },
   "engines": {
     "node": ">=0.12.0"
