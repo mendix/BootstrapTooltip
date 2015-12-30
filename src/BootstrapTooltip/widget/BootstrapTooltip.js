@@ -11,10 +11,11 @@ define([
 	"BootstrapTooltip/lib/jquery",
 	"BootstrapTooltip/lib/tooltip",
 	"dojo/text!BootstrapTooltip/widget/template/BootstrapTooltip.html"
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojolang, $, tooltip, widgetTemplate) {
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojolang, _jQuery, tooltip, widgetTemplate) {
 	"use strict";
 
-	$ = tooltip.createInstance($);
+	var _jQ = _jQuery.noConflict(true);
+	$ = tooltip.createInstance(_jQ);
 
 	// Declare widget"s prototype.
 	return declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase, _TemplatedMixin], {
@@ -71,24 +72,24 @@ define([
 		},
 
 		_initializeTooltip: function () {
-			
+
 			// Find element by classname in the same container (DOM level) as widget
 			var $targetElement = $(this.domNode).siblings("." +this.tooltipClassName);
-			
+
 			// No element found on same level, try to find target element on page
 			if($targetElement.length===0) {
 				$targetElement = $("." + this.tooltipClassName);
 			}
-			
+
 			if($targetElement.length===0) {
 				console.warn("Did you configure BootstrapTooltip widget correctly? Couldn't find an element with class '"+ this.tooltipClassName +"' on same level as widget (id='" + this.domNode.id+"')" )
 			}
-			
+
 			//if the element is a label+input combination, find the input element.
 			if ($targetElement.hasClass("form-group")){
 				$targetElement = $targetElement.find(".form-control").length !== 0 ? $targetElement.find(".form-control") : $targetElement.find("input");
-			}			
-			
+			}
+
 			$targetElement.tooltip({
 				title: this._tooltipText,
 				placement: this.tooltipLocation,
