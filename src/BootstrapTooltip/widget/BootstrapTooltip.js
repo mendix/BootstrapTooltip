@@ -15,7 +15,7 @@ define([
 	"use strict";
 
 	var _jQ = _jQuery.noConflict(true);
-	$ = tooltip.createInstance(_jQ);
+	var j$ = tooltip.createInstance(_jQ);
 
 	// Declare widget"s prototype.
 	return declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase, _TemplatedMixin], {
@@ -74,11 +74,11 @@ define([
 		_initializeTooltip: function () {
 
 			// Find element by classname in the same container (DOM level) as widget
-			var $targetElement = $(this.domNode).siblings("." +this.tooltipClassName);
+			var $targetElement = j$(this.domNode).siblings("." +this.tooltipClassName);
 
 			// No element found on same level, try to find target element on page
 			if($targetElement.length===0) {
-				$targetElement = $("." + this.tooltipClassName);
+				$targetElement = j$("." + this.tooltipClassName);
 			}
 
 			if($targetElement.length===0) {
