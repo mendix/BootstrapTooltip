@@ -11,16 +11,16 @@
             <category>Appearance</category>
             <description>The tooltip will be connected to the element of which the Class property corresponds to the specified value and is on the same level as the target element.</description>
         </property>
-        <property key="tooltipMessageString" type="string" required="false">
+        <property key="tooltipMessageString" type="translatableString" required="false">
             <caption>Default text</caption>
             <category>Data source</category>
             <description>Text being displayed when no data source microflow is defined.</description>
         </property>
-		<property key="tooltipRenderHTML" type="boolean" defaultValue="false">
-			<caption>Render HTML</caption>
-			<category>Appearance</category>
-			<description>Renders the tooltip content as HTML</description>
-		</property>
+        <property key="tooltipRenderHTML" type="boolean" defaultValue="false">
+            <caption>Render HTML</caption>
+            <category>Appearance</category>
+            <description>Renders the tooltip content as HTML</description>
+        </property>
         <property key="tooltipLocation" type="enumeration" defaultValue="top">
             <caption>Tooltip position</caption>
             <category>Appearance</category>
@@ -50,4 +50,3 @@
         </property>
     </properties>
 </widget>
-

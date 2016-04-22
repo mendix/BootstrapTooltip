@@ -42,18 +42,10 @@ define([
             logger.debug(this.id + ".update");
 
             if (this.tooltipMessageMicroflow !== "") {
-                mx.data.action({
-                    params: {
-                        actionname: this.tooltipMessageMicroflow
-                    },
-                    callback: lang.hitch(this, function (string) {
-                        this._tooltipText = string;
-                        this._initializeTooltip();
-                    }),
-                    error: lang.hitch(this, function (error) {
-                        console.warn("Error executing Microflow: " + error);
-                    })
-                }, this);
+                this._execMf(this.tooltipMessageMicroflow, null, lang.hitch(this, function (string) {
+                    this._tooltipText = string;
+                    this._initializeTooltip();
+                }));
             } else if (this.tooltipMessageString !== "") {
                 this._tooltipText = this.tooltipMessageString;
                 this._initializeTooltip();
@@ -90,7 +82,36 @@ define([
                 trigger: this._tooltipTrigger,
                 html : this.tooltipRenderHTML
             });
-        }
+        },
+
+        _execMf: function (mf, guid, cb) {
+            logger.debug(this.id + "._execMf");
+
+            var mfParams = {
+                actionname: mf
+            };
+
+            if (guid) {
+                mfParams.applyto = "selection";
+                mfParams.guids = [ guid ];
+            }
+
+            mx.data.action({
+                params: mfParams,
+                store: {
+                    caller: this.mxform
+                },
+                callback: lang.hitch(this, function (res) {
+                    if (cb && typeof cb === "function") {
+                        cb(res);
+                    }
+                }),
+                error: lang.hitch(this, function (error) {
+                    console.warn(this.id + "._execMF error: " + error.description);
+                })
+            }, this);
+
+        },
     });
 });
 

@@ -10,22 +10,12 @@ define([
         update: function (obj, callback) {
             logger.debug(this.id + ".update");
 
-            var guid = obj.getGuid();
+            var guid = obj ? obj.getGuid() : null;
             if (this.tooltipMessageMicroflow !== "") {
-                mx.data.action({
-                    params: {
-                        applyto: "selection",
-                        actionname: this.tooltipMessageMicroflow,
-                        guids: [guid]
-                    },
-                    callback: lang.hitch(this, function (string) {
-                        this._tooltipText = string;
-                        this._initializeTooltip();
-                    }),
-                    error: lang.hitch(this, function (error) {
-                        console.warn("Error executing Microflow: " + error);
-                    })
-                }, this);
+                this._execMf(this.tooltipMessageMicroflow, guid, lang.hitch(this, function (string) {
+                    this._tooltipText = string;
+                    this._initializeTooltip();
+                }));
             } else if (this.tooltipMessageString !== "") {
                 this._tooltipText = this.tooltipMessageString;
                 this._initializeTooltip();
