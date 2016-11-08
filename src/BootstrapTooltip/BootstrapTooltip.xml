@@ -9,7 +9,9 @@
         <property key="tooltipClassName" type="string" required="true">
             <caption>Target element classname</caption>
             <category>Appearance</category>
-            <description>The tooltip will be connected to the element of which the Class property corresponds to the specified value and is on the same level as the target element.</description>
+            <description>The tooltip will be connected to the element of which the Class property corresponds to the specified value and is on the same level as the target element.
+
+* To make sure you target the right element, place the element and the BootstrapTooltip widget in the same container.</description>
         </property>
         <property key="tooltipMessageString" type="translatableString" required="false">
             <caption>Default text</caption>
