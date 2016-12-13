@@ -50,5 +50,13 @@
             <description>Return value: Text to display in tooltip.</description>
             <returnType type="String" />
         </property>
+        <property key="tooltipAttribute" type="attribute" required="false">
+            <caption>Tooltip attribute</caption>
+            <category>Data source</category>
+            <description>The string attribute of which you want to show its content</description>
+            <attributeTypes>
+				<attributeType name="String" />
+			</attributeTypes>
+        </property>
     </properties>
 </widget>
