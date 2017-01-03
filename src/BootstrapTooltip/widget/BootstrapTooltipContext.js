@@ -16,10 +16,10 @@ define([
                     this._tooltipText = string;
                     this._initializeTooltip();
                 }));
-            } else if (this.tooltipMessageString !== "") {
-                this._tooltipText = this.tooltipMessageString;
-                this._initializeTooltip();
             } else {
+                if (this.tooltipMessageString !== "") {
+                    this._tooltipText = this.tooltipMessageString;
+                }
                 this._initializeTooltip();
             }
 

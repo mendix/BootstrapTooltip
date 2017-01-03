@@ -42,21 +42,19 @@ define([
             logger.debug(this.id + ".update");
 
             if (this.tooltipMessageMicroflow !== "") {
-                this._execMf(this.tooltipMessageMicroflow, null, lang.hitch(this, function (string) {
+                this._execMf(this.tooltipMessageMicroflow, obj ? obj.getGuid() : null, lang.hitch(this, function (string) {
                     this._tooltipText = string;
-                    this._initializeTooltip();
+                    this._initializeTooltip(callback);
                 }));
-            } else if (this.tooltipMessageString !== "") {
-                this._tooltipText = this.tooltipMessageString;
-                this._initializeTooltip();
             } else {
-                this._initializeTooltip();
+                if (this.tooltipMessageString !== "") {
+                    this._tooltipText = this.tooltipMessageString;
+                }
+                this._initializeTooltip(callback);
             }
-
-            callback();
         },
 
-        _initializeTooltip: function () {
+        _initializeTooltip: function (cb) {
             logger.debug(this.id + "._initializeTooltip");
 
             // Find element by classname in the same container (DOM level) as widget
@@ -82,6 +80,8 @@ define([
                 trigger: this._tooltipTrigger,
                 html : this.tooltipRenderHTML
             });
+
+            this._executeCallback(cb, "_initializeTooltip");
         },
 
         _execMf: function (mf, guid, cb) {
@@ -96,22 +96,36 @@ define([
                 mfParams.guids = [ guid ];
             }
 
-            mx.data.action({
+            var mfAction = {
                 params: mfParams,
-                store: {
-                    caller: this.mxform
-                },
-                callback: lang.hitch(this, function (res) {
-                    if (cb && typeof cb === "function") {
-                        cb(res);
+                callback: lang.hitch(this, function (obj) {
+                    if (typeof cb === "function") {
+                        cb(obj);
                     }
                 }),
                 error: lang.hitch(this, function (error) {
-                    console.warn(this.id + "._execMF error: " + error.description);
+                    console.log(this.id + "._execMf error: " + error.description);
                 })
-            }, this);
+            };
+
+            if (!mx.version || mx.version && parseInt(mx.version.split(".")[0]) < 6) {
+                mfAction.store = {
+                    caller: this.mxform
+                };
+            } else {
+                mfAction.origin = this.mxform;
+            }
+
+            mx.data.action(mfAction, this);
 
         },
+
+        _executeCallback: function (cb, from) {
+            logger.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
+            if (cb && typeof cb === "function") {
+                cb();
+            }
+        }
     });
 });
 
