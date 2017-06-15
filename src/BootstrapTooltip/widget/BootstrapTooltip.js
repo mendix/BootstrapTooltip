@@ -18,6 +18,8 @@ define([
         templateString: widgetTemplate,
 
         tooltipClassName: "",
+        tooltipSource: "",
+        tooltipMessageAttribute: "",
         tooltipMessageMicroflow: "",
         tooltipMessageString: "",
         tooltipLocation: "top",
