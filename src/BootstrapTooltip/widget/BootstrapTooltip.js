@@ -76,7 +76,7 @@ define([
                 $targetElement = $targetElement.find(".form-control").length !== 0 ? $targetElement.find(".form-control") : $targetElement.find("input");
             }
 
-            $targetElement.tooltip({
+            $targetElement.data('bs.tooltip',false).tooltip({
                 title: this._tooltipText,
                 placement: this.tooltipLocation,
                 trigger: this._tooltipTrigger,
