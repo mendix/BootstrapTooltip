@@ -50,5 +50,11 @@
             <description>Return value: Text to display in tooltip.</description>
             <returnType type="String" />
         </property>
+		<property key="useBodyAsContainer" type="boolean" required="true"  defaultValue="false">
+            <caption>Use body container</caption>
+            <category>Appearance</category>
+            <description>Place the tooltip on the body instead of the container. Use this option if the tooltip displays small because of it's container. 
+			Using this option places the tooltip on the body instead of the container which makes styling a lot easier, but the position of the tooltip won't change correctly when resizing the browser. </description>
+        </property>
     </properties>
 </widget>

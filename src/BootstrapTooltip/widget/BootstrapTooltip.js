@@ -80,7 +80,8 @@ define([
                 title: this._tooltipText,
                 placement: this.tooltipLocation,
                 trigger: this._tooltipTrigger,
-                html : this.tooltipRenderHTML
+                html : this.tooltipRenderHTML,
+				container: this.useBodyAsContainer ? 'body' : false
             });
 
             this._executeCallback(cb, "_initializeTooltip");
