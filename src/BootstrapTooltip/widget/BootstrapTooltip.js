@@ -76,11 +76,12 @@ define([
                 $targetElement = $targetElement.find(".form-control").length !== 0 ? $targetElement.find(".form-control") : $targetElement.find("input");
             }
 
-            $targetElement.tooltip({
+            $targetElement.data('bs.tooltip',false).tooltip({
                 title: this._tooltipText,
                 placement: this.tooltipLocation,
                 trigger: this._tooltipTrigger,
-                html : this.tooltipRenderHTML
+                html : this.tooltipRenderHTML,
+				container: this.useBodyAsContainer ? 'body' : false
             });
 
             this._executeCallback(cb, "_initializeTooltip");
