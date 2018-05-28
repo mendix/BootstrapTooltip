@@ -44,7 +44,7 @@
                 <enumerationValue key="click">On click</enumerationValue>
             </enumerationValues>
         </property>
-		<property key="tooltipSource" type="enumeration" defaultValue="microflow">
+        <property key="tooltipSource" type="enumeration" defaultValue="microflow">
             <caption>Tooltip source</caption>
             <category>Data source</category>
             <description>Which source should be used to obtain the value from.</description>
@@ -53,29 +53,29 @@
                 <enumerationValue key="attribute">Object attribute</enumerationValue>
             </enumerationValues>
         </property>
-		
+
         <property key="tooltipMessageMicroflow" type="microflow" required="false">
             <caption>Tooltip source microflow</caption>
             <category>Data source</category>
             <description>Return value: Text to display in tooltip.</description>
             <returnType type="String" />
         </property>
-		
-		<property key="tooltipMessageAttribute" type="attribute" allowNonPersistableEntities="true" isPath="optional" pathType="reference" required="false">
-			<caption>Tooltip source attribute</caption>
-			<category>Data source</category>
-			<description>Text to display in tooltip.</description>
-			<attributeTypes>
-				<attributeType name="AutoNumber"/>
-				<attributeType name="String" />
-				<attributeType name="Enum"/>
-				<attributeType name="Integer"/>
-				<attributeType name="Float"/>
-				<attributeType name="Currency"/>
-				<attributeType name="Decimal"/>
-				<attributeType name="Long"/>
-			</attributeTypes>
-		</property>
-		
+
+        <property key="tooltipMessageAttribute" type="attribute" allowNonPersistableEntities="true" isPath="optional" pathType="reference" required="false">
+            <caption>Tooltip source attribute</caption>
+            <category>Data source</category>
+            <description>Text to display in tooltip.</description>
+            <attributeTypes>
+                <attributeType name="AutoNumber"/>
+                <attributeType name="String" />
+                <attributeType name="Enum"/>
+                <attributeType name="Integer"/>
+                <attributeType name="Float"/>
+                <attributeType name="Currency"/>
+                <attributeType name="Decimal"/>
+                <attributeType name="Long"/>
+            </attributeTypes>
+        </property>
+
     </properties>
 </widget>

@@ -1,54 +1,66 @@
-define([
-    "dojo/_base/declare",
-    "dojo/_base/lang",
-    "BootstrapTooltip/widget/BootstrapTooltip"
-], function (declare, lang, _bootstrapTooltipWidget) {
-    "use strict";
+import {
+    defineWidget,
+} from 'widget-base-helpers';
 
-    return declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_bootstrapTooltipWidget], {
+import Core from 'Core';
 
-        update: function (obj, callback) {
-            logger.debug(this.id + ".update");
+export default defineWidget('BootstrapTooltipContext', false, {
 
-            var guid = obj ? obj.getGuid() : null;
-            if (this.tooltipSource === "microflow") {
-                if (this.tooltipMessageMicroflow !== "") {
-                    this._execMf(this.tooltipMessageMicroflow, guid, lang.hitch(this, function (string) {
-                        this._tooltipText = string;
+    tooltipClassName: '',
+    tooltipMessageString: '',
+    tooltipRenderHTML: false,
+    tooltipLocation: 'top',
+    tooltipMode: 'hover',
+    tooltipSource: '',
+    tooltipMessageMicroflow: '',
+    tooltipMessageAttribute: '',
+
+    update(obj, cb) {
+        this.log('update');
+
+        if ('microflow' === this.tooltipSource) {
+
+            if ('' !== this.tooltipMessageMicroflow) {
+                this.execute(this.tooltipMessageMicroflow, obj ? obj.getGuid() : null)
+                    .then(text => {
+                        this._tooltipText = text;
                         this._initializeTooltip();
-                    }));
-                } else {
-                    if (this.tooltipMessageString !== "") {
-                        this._tooltipText = this.tooltipMessageString;
-                    }
-                    this._initializeTooltip();
+                    }, e => {
+                        console.error(this.id, e);
+                        this.runCB(cb);
+                    });
+            } else {
+
+                if ('' !== this.tooltipMessageString) {
+                    this._tooltipText = this.tooltipMessageString;
                 }
-            } else if (this.tooltipSource === "attribute") {
-                if (this.tooltipMessageAttribute !== "") {
-
-                    if (obj.isEnum(this.tooltipMessageAttribute)) {
-                        this._tooltipText = obj.getEnumCaption(this.tooltipMessageAttribute);
-                    } else {
-                        this._tooltipText = obj.get(this.tooltipMessageAttribute);
-                    }
-
-                    if (this._tooltipText == null || this._tooltipText === "") {
-                        this._tooltipText = this.tooltipMessageString;
-                    }
-
-                    this._initializeTooltip();
-                } else {
-                    if (this.tooltipMessageString !== "") {
-                        this._tooltipText = this.tooltipMessageString;
-                    }
-                    this._initializeTooltip();
-                }
+                this._initializeTooltip();
             }
 
+        } else if ('attribute' === this.tooltipSource) {
 
-            callback();
+            if ('' !== this.tooltipMessageAttribute) {
+
+                if (obj.isEnum(this.tooltipMessageAttribute)) {
+                    this._tooltipText = obj.getEnumCaption(this.tooltipMessageAttribute);
+                } else {
+                    this._tooltipText = obj.get(this.tooltipMessageAttribute);
+                }
+
+                if (null === this._tooltipText || '' === this._tooltipText) {
+                    this._tooltipText = this.tooltipMessageString;
+                }
+
+                this._initializeTooltip();
+            } else {
+                if ('' !== this.tooltipMessageString) {
+                    this._tooltipText = this.tooltipMessageString;
+                }
+                this._initializeTooltip();
+            }
         }
-    });
-});
 
-require(["BootstrapTooltip/widget/BootstrapTooltipContext"]);
+        this.runCB(cb);
+    },
+
+}, Core);
