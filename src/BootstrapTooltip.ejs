@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="<%= NAME %>.widget.<%= NAME %>" needsEntityContext="false" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>BootstrapTooltip</name>
+    <description></description>
+
+    <icon></icon>
+
+    <properties>
+        <property key="tooltipClassName" type="string" required="true">
+            <caption>Target element classname</caption>
+            <category>Appearance</category>
+            <description>The tooltip will be connected to the element of which the Class property corresponds to the specified value and is on the same level as the target element.
+
+* To make sure you target the right element, place the element and the BootstrapTooltip widget in the same container.</description>
+        </property>
+        <property key="tooltipMessageString" type="translatableString" required="false">
+            <caption>Default text</caption>
+            <category>Data source</category>
+            <description>Text being displayed when no data source microflow is defined.</description>
+        </property>
+        <property key="tooltipRenderHTML" type="boolean" defaultValue="false">
+            <caption>Render HTML</caption>
+            <category>Appearance</category>
+            <description>Renders the tooltip content as HTML</description>
+        </property>
+        <property key="tooltipLocation" type="enumeration" defaultValue="top">
+            <caption>Tooltip position</caption>
+            <category>Appearance</category>
+            <description>The location of the tooltip relative to the target element.</description>
+            <enumerationValues>
+                <enumerationValue key="top">Top</enumerationValue>
+                <enumerationValue key="left">Left</enumerationValue>
+                <enumerationValue key="bottom">Bottom</enumerationValue>
+                <enumerationValue key="right">Right</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="tooltipMode" type="enumeration" defaultValue="hover">
+            <caption>Tooltip mode</caption>
+            <category>Appearance</category>
+            <description>When to show the tooltip.</description>
+            <enumerationValues>
+                <enumerationValue key="hover">On hover, focus</enumerationValue>
+                <enumerationValue key="focus">On focus</enumerationValue>
+                <enumerationValue key="click">On click</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="tooltipMessageMicroflow" type="microflow" required="false">
+            <caption>Tooltip source Microflow</caption>
+            <category>Data source</category>
+            <description>Return value: Text to display in tooltip.</description>
+            <returnType type="String" />
+        </property>
+    </properties>
+</widget>
