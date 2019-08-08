@@ -1,10 +1,7 @@
-const paths = require("./paths");
 const XMLPlugin = require("xml-webpack-plugin");
 const ArchivePlugin = require("webpack-archive-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const {MxAppRootDir} = require("./vars");
-const {widgetName, widgetNameWithContext, friendlyName, description, version} = require("../package.json");
 const fs = require("fs-extra");
 const webpack = require("webpack");
 
@@ -23,43 +20,26 @@ const MODES = {
   PROD: "production"
 };
 
-const isProd = process.env.MODE === MODES.PROD;
 const isDev = process.env.MODE === MODES.DEV;
 
-const widgetDir = `${widgetName}/widget`;
+const widgetDir = `BootstrapTooltip/widget`;
 const widgetUIDir = `${widgetDir}/ui`;
-
-const generalXMLFilesConfigs = {
-  NAME: widgetName,
-  NAME_WITH_CONTEXT: widgetNameWithContext,
-  VERSION: version
-};
 
 const widgetXMLFiles = [
   {
-    template: paths.widgetPackageXML,
-    filename: `package.xml`,
+    template: "./src/package.xml",
+    filename: "package.xml",
     data: {
-      ...generalXMLFilesConfigs
+      VERSION: process.env.npm_package_version
     }
   },
   {
-    template: paths.widgetConfigXML,
-    filename: `${widgetName}/${widgetName}.xml`,
-    data: {
-      ...generalXMLFilesConfigs,
-      FRIENDLY_NAME: friendlyName,
-      WIDGET_DESC: description
-    }
+    template: "./src/BootstrapTooltip.xml",
+    filename: "BootstrapTooltip/BootstrapTooltip.xml"
   },
   {
-    template: paths.widgetConfigXMLWithContext,
-    filename: `${widgetName}/${widgetNameWithContext}.xml`,
-    data: {
-      ...generalXMLFilesConfigs,
-      FRIENDLY_NAME: friendlyName,
-      WIDGET_DESC: description
-    }
+    template: "./src/BootstrapTooltipContext.xml",
+    filename: "BootstrapTooltip/BootstrapTooltipContext.xml"
   }
 ];
 
@@ -67,14 +47,16 @@ module.exports = {
   mode: isDev ? MODES.DEV : MODES.PROD,
   target: "web",
   devtool: isDev ? "eval-source-map" : false,
-  // devServer: devServerConfigs,
-  entry: {BootstrapTooltipContext: paths.srcEntryContext, BootstrapTooltip: paths.srcEntryContext},
+  entry: {
+    BootstrapTooltipContext: "./src/BootstrapTooltipContext.js",
+    BootstrapTooltip: "./src/BootstrapTooltip.js"
+  },
   watch: isDev,
   watchOptions: {
     ignored: /node_modules/
   },
   output: {
-    path: paths.distDir,
+    path: `${__dirname}/dist/BootstrapTooltip`,
     filename: `${widgetDir}/[name].js`,
     libraryTarget: "amd"
   },
@@ -103,7 +85,25 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
-          {loader: "postcss-loader", options: {config: {path: paths.confDir}}},
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [
+                require("autoprefixer"),
+                require("postcss-clean"),
+                require("cssnano")({
+                  preset: [
+                    "default",
+                    {
+                      discardComments: {
+                        removeAll: true
+                      }
+                    }
+                  ]
+                })
+              ]
+            }
+          },
           "sass-loader"
         ]
       },
@@ -131,16 +131,21 @@ module.exports = {
 
 function _getPlugins() {
   //ensure distDir fir Archive Plugin
-  fs.ensureDirSync(paths.distDir);
+  fs.ensureDirSync("./dist");
   const plugins = [
     new MiniCssExtractPlugin({
-      filename: `${widgetUIDir}/${widgetName}.css`
+      filename: `${widgetUIDir}/BootstrapTooltip.css`
     }),
     new XMLPlugin({
       files: widgetXMLFiles
     }),
     new ArchivePlugin({
-      output: `${paths.distDir}/${widgetName}`,
+      output: "./dist/BootstrapTooltip",
+      format: "zip",
+      ext: "mpk"
+    }),
+    new ArchivePlugin({
+      output: "./test/widgets/BootstrapTooltip",
       format: "zip",
       ext: "mpk"
     }),
@@ -150,14 +155,5 @@ function _getPlugins() {
     })
   ];
 
-  if (MxAppRootDir) {
-    plugins.push(
-      new ArchivePlugin({
-        output: `${MxAppRootDir}/widgets/${widgetName}`,
-        format: "zip",
-        ext: "mpk"
-      })
-    );
-  }
   return plugins;
 }

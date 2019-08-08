@@ -1,9 +1,8 @@
 import declare from "dojo/_base/declare";
 import lang from "dojo/_base/lang";
 import _bootstrapTooltipWidget from "./BootstrapTooltip";
-import {widgetName, widgetNameWithContext} from "../package.json";
 
-export default declare(`${widgetName}.widget.${widgetNameWithContext}`, [_bootstrapTooltipWidget], {
+export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_bootstrapTooltipWidget], {
   update: function(obj, callback) {
     logger.debug(this.id + ".update");
 
