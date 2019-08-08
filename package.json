@@ -1,12 +1,9 @@
 {
   "name": "BootstrapTooltip",
-  "widgetName": "BootstrapTooltip",
-  "widgetNameWithContext": "BootstrapTooltipContext",
   "version": "3.1.0",
   "description": "",
   "license": "",
   "author": "",
-  "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.4.1"
@@ -19,7 +16,6 @@
     "babel": "^6.23.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
@@ -37,22 +33,11 @@
     "webpack": "4.35.0",
     "webpack-archive-plugin": "^3.0.0",
     "webpack-cli": "3.3.5",
-    "webpack-dev-server": "3.7.2",
-    "webpack-inject-plugin": "^1.5.3",
     "xml-webpack-plugin": "0.0.2"
   },
-  "engines": {
-    "node": ">=5"
-  },
-  "generatorVersion": "2.0.1",
-  "paths": {
-    "testProjectFolder": "./test/",
-    "testProjectFileName": "Test.mpr"
-  },
   "scripts": {
-    "start": "cross-env MODE=development webpack-dev-server --config conf/webpack.config.js",
-    "dev": "cross-env MODE=development webpack --config conf/webpack.config.js",
-    "build": "cross-env MODE=production webpack --config conf/webpack.config.js",
-    "open": "open-cli ./MxTestProject/DojoWidgetTest.mpr"
+    "start": "cross-env MODE=development webpack",
+    "build": "cross-env MODE=production webpack",
+    "open": "open-cli ./test/Test.mpr"
   }
 }

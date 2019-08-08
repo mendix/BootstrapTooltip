@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="<%= NAME %>.widget.<%= NAME_WITH_CONTEXT %>" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
-    <name>BootstrapTooltip (Context)</name>
+<widget id="BootstrapTooltip.widget.BootstrapTooltip" needsEntityContext="false" 
+    xmlns="http://www.mendix.com/widget/1.0/">
+    <name>BootstrapTooltip</name>
     <description></description>
 
     <icon></icon>
 
     <properties>
         <property key="tooltipClassName" type="string" required="true">
-            <caption>Target element Class</caption>
+            <caption>Target element classname</caption>
             <category>Appearance</category>
             <description>The tooltip will be connected to the element of which the Class property corresponds to the specified value and is on the same level as the target element.
 
@@ -44,38 +45,11 @@
                 <enumerationValue key="click">On click</enumerationValue>
             </enumerationValues>
         </property>
-		<property key="tooltipSource" type="enumeration" defaultValue="microflow">
-            <caption>Tooltip source</caption>
-            <category>Data source</category>
-            <description>Which source should be used to obtain the value from.</description>
-            <enumerationValues>
-                <enumerationValue key="microflow">Microflow</enumerationValue>
-                <enumerationValue key="attribute">Object attribute</enumerationValue>
-            </enumerationValues>
-        </property>
-		
         <property key="tooltipMessageMicroflow" type="microflow" required="false">
-            <caption>Tooltip source microflow</caption>
+            <caption>Tooltip source Microflow</caption>
             <category>Data source</category>
             <description>Return value: Text to display in tooltip.</description>
             <returnType type="String" />
         </property>
-		
-		<property key="tooltipMessageAttribute" type="attribute" allowNonPersistableEntities="true" isPath="optional" pathType="reference" required="false">
-			<caption>Tooltip source attribute</caption>
-			<category>Data source</category>
-			<description>Text to display in tooltip.</description>
-			<attributeTypes>
-				<attributeType name="AutoNumber"/>
-				<attributeType name="String" />
-				<attributeType name="Enum"/>
-				<attributeType name="Integer"/>
-				<attributeType name="Float"/>
-				<attributeType name="Currency"/>
-				<attributeType name="Decimal"/>
-				<attributeType name="Long"/>
-			</attributeTypes>
-		</property>
-		
     </properties>
 </widget>

@@ -4,9 +4,8 @@ import _TemplatedMixin from "dijit/_TemplatedMixin";
 import lang from "dojo/_base/lang";
 import {tooltip} from "bootstrap";
 import widgetTemplate from "./BootstrapTooltip.html";
-import {widgetName} from "../package.json";
 
-export default declare(`${widgetName}.widget.${widgetName}`, [_WidgetBase, _TemplatedMixin], {
+export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase, _TemplatedMixin], {
   templateString: widgetTemplate,
 
   tooltipClassName: "",
