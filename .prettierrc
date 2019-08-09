@@ -1,11 +1,11 @@
 {
-    "tabWidth": 4,
-    "overrides": [
-        {
-            "files": "*.xml",
-            "options": {
-                "parser": "html"
-            }
-        }
-    ]
+  "tabWidth": 4,
+  "overrides": [
+    {
+      "files": ["*.json", ".prettierrc"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
 }

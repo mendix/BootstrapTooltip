@@ -1,3 +1,4 @@
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const XMLPlugin = require("xml-webpack-plugin");
 const ArchivePlugin = require("webpack-archive-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -130,9 +131,11 @@ module.exports = {
 };
 
 function _getPlugins() {
-    //ensure distDir fir Archive Plugin
+    //ensure distDir for Archive Plugin
     fs.ensureDirSync("./dist");
+
     const plugins = [
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: `${widgetUIDir}/BootstrapTooltip.css`
         }),
@@ -144,16 +147,23 @@ function _getPlugins() {
             format: "zip",
             ext: "mpk"
         }),
-        new ArchivePlugin({
-            output: "./test/widgets/BootstrapTooltip",
-            format: "zip",
-            ext: "mpk"
-        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
         })
     ];
+
+    const mxVersions = [6, 7, 8];
+    mxVersions.forEach(version => {
+        fs.ensureDirSync(`./test/mx-${version}/widgets`);
+        plugins.push(
+            new ArchivePlugin({
+                output: `./test/mx-${version}/widgets/BootstrapTooltip`,
+                format: "zip",
+                ext: "mpk"
+            })
+        );
+    });
 
     return plugins;
 }
