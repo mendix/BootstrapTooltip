@@ -1,43 +1,45 @@
 {
-  "name": "BootstrapTooltip",
-  "version": "3.1.0",
-  "description": "",
-  "license": "",
-  "author": "",
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.4.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/preset-env": "^7.2.3",
-    "autoprefixer": "^9.4.3",
-    "babel": "^6.23.0",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-add-module-exports": "^1.0.0",
-    "cross-env": "^5.2.0",
-    "css-loader": "^2.1.0",
-    "cssnano": "^4.1.8",
-    "file-loader": "^3.0.1",
-    "fs-extra": "^7.0.1",
-    "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.11.0",
-    "open-cli": "^5.0.0",
-    "postcss-clean": "^1.1.0",
-    "postcss-loader": "^3.0.0",
-    "raw-loader": "^3.1.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.1.1",
-    "webpack": "4.35.0",
-    "webpack-archive-plugin": "^3.0.0",
-    "webpack-cli": "3.3.5",
-    "xml-webpack-plugin": "0.0.2"
-  },
-  "scripts": {
-    "start": "cross-env MODE=development webpack",
-    "build": "cross-env MODE=production webpack",
-    "open": "open-cli ./test/Test.mpr"
-  }
+    "name": "BootstrapTooltip",
+    "version": "3.1.0",
+    "description": "",
+    "license": "",
+    "author": "",
+    "dependencies": {
+        "bootstrap": "^3.3.7",
+        "jquery": "^3.4.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+        "@babel/preset-env": "^7.2.3",
+        "autoprefixer": "^9.4.3",
+        "babel": "^6.23.0",
+        "babel-loader": "^8.0.4",
+        "babel-plugin-add-module-exports": "^1.0.0",
+        "cross-env": "^5.2.0",
+        "css-loader": "^2.1.0",
+        "cssnano": "^4.1.8",
+        "file-loader": "^3.0.1",
+        "fs-extra": "^7.0.1",
+        "mini-css-extract-plugin": "^0.5.0",
+        "node-sass": "^4.11.0",
+        "open-cli": "^5.0.0",
+        "postcss-clean": "^1.1.0",
+        "postcss-loader": "^3.0.0",
+        "prettier": "^1.18.2",
+        "raw-loader": "^3.1.0",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1",
+        "uglifyjs-webpack-plugin": "^2.1.1",
+        "webpack": "4.35.0",
+        "webpack-archive-plugin": "^3.0.0",
+        "webpack-cli": "3.3.5",
+        "xml-webpack-plugin": "0.0.2"
+    },
+    "scripts": {
+        "start": "cross-env MODE=development webpack",
+        "build": "cross-env MODE=production webpack",
+        "open": "open-cli ./test/Test.mpr",
+        "prettier": "prettier --write '**/*.*'"
+    }
 }
