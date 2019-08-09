@@ -18,5 +18,3 @@ node_modules/
 *DS_Store*
 .vscode/
 *.bak
-
-local.config.js
