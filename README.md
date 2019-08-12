@@ -53,23 +53,31 @@ To start development on the Bootstrap Tooltip:
 
 To install all project dependencies, execute the following comamnd in the terminal:
 
-`npm install`
+```
+npm install
+```
 
 In order to test the widget with one of the supplied test projects, run the following command to generate and include an mpk file in every test project (and in a dist folder):
 
-`npm start`
+```
+npm start
+```
 
 This command will also watch the source code files. When changes to these files have been saved, a new mpk file will be generated and included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk.
 
 To keep source code formatting uniform across the project, run the following command to format all project source files (XML files are not supported):
 
-`npm run prettier:fix`
+```
+npm run prettier:fix
+```
 
 ## Widget releasing
 
 To release the widget in the Mendix App Store, run the following command to build the widget:
 
-`npm run build`
+```
+npm run build
+```
 
 The command will optimize the source code for production environment and generate a new mpk that will be included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk.
 
