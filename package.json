@@ -2,8 +2,8 @@
   "name": "BootstrapTooltip",
   "version": "3.1.0",
   "description": "",
-  "license": "",
-  "author": "",
+  "license": "Apache-2.0",
+  "author": "Mendix Technology B.V.",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.4.1"
@@ -40,7 +40,6 @@
   "scripts": {
     "start": "cross-env MODE=development webpack",
     "build": "cross-env MODE=production webpack",
-    "open": "open-cli ./test/Test.mpr",
     "prettier": "prettier --list-different \"**/*.*\"",
     "prettier:fix": "prettier --write \"**/*.*\""
   }
