@@ -3,10 +3,14 @@ node_modules/
 dist/
 test/*/deployment/
 test/*/javasource/
+test/*/javascriptsource/
 test/*/resources/
-test/*/theme/
+test/mx-6/theme/
+test/mx-7/theme/
 test/*/userlib/
-test/*/widgets/
+test/mx-6/widgets/
+test/mx-7/widgets/
+test/*/widgets/BootstrapTooltip.mpk
 test/*/.classpath
 test/*/.project
 test/*/*.launch
