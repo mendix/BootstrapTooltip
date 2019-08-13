@@ -1,0 +1,7 @@
+dist/
+test/
+
+*.xml
+.gitignore
+.prettierignore
+.DS_Store
