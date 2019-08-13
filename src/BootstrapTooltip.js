@@ -22,6 +22,8 @@ export default declare(
         _tooltipText: "No custom text specified for this tooltip",
         _tooltipTrigger: null,
 
+        _tooltipInitialized: false,
+
         postCreate: function() {
             logger.debug(this.id + ".postCreate");
 
@@ -56,41 +58,46 @@ export default declare(
 
         _initializeTooltip: function(cb) {
             logger.debug(this.id + "._initializeTooltip");
-
-            // Find element by classname in the same container (DOM level) as widget
-            var $targetElement = $(this.domNode).siblings(
-                "." + this.tooltipClassName
-            );
-
-            // No element found on same level, try to find target element on page
-            if ($targetElement.length === 0) {
-                $targetElement = $("." + this.tooltipClassName);
-            }
-
-            if ($targetElement.length === 0) {
-                console.warn(
-                    "Did you configure BootstrapTooltip widget correctly? Couldn't find an element with class '" +
-                        this.tooltipClassName +
-                        "' on same level as widget (id='" +
-                        this.domNode.id +
-                        "')"
+            if (!this._tooltipInitialized) {
+                // Find element by classname in the same container (DOM level) as widget
+                var $targetElement = $(this.domNode).siblings(
+                    "." + this.tooltipClassName
                 );
-            }
 
-            //if the element is a label+input combination, find the input element.
-            if ($targetElement.hasClass("form-group")) {
-                $targetElement =
-                    $targetElement.find(".form-control").length !== 0
-                        ? $targetElement.find(".form-control")
-                        : $targetElement.find("input");
-            }
+                // No element found on same level, try to find target element on page
+                if ($targetElement.length === 0) {
+                    $targetElement = $("." + this.tooltipClassName);
+                }
 
-            $targetElement.tooltip({
-                title: this._tooltipText,
-                placement: this.tooltipLocation,
-                trigger: this._tooltipTrigger,
-                html: this.tooltipRenderHTML
-            });
+                if ($targetElement.length === 0) {
+                    console.warn(
+                        "Did you configure BootstrapTooltip widget correctly? Couldn't find an element with class '" +
+                            this.tooltipClassName +
+                            "' on same level as widget (id='" +
+                            this.domNode.id +
+                            "')"
+                    );
+                }
+
+                //if the element is a label+input combination, find the input element.
+                if ($targetElement.hasClass("form-group")) {
+                    $targetElement =
+                        $targetElement.find(".form-control").length !== 0
+                            ? $targetElement.find(".form-control")
+                            : $targetElement.find("input");
+                }
+
+                $targetElement.tooltip({
+                    title: () => {
+                        return this._tooltipText;
+                    },
+                    placement: this.tooltipLocation,
+                    trigger: this._tooltipTrigger,
+                    html: this.tooltipRenderHTML
+                });
+
+                !this._tooltipInitialized;
+            }
 
             this._executeCallback(cb, "_initializeTooltip");
         },
