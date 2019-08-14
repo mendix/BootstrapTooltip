@@ -63,7 +63,7 @@ In order to test the widget with one of the supplied test projects, run the foll
 npm start
 ```
 
-This command will also watch the source code files. When changes to these files have been saved, a new mpk file will be generated and included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk.
+This command will also watch the source code files. When changes to these files have been saved, a new mpk file will be generated and included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk. The source files in the deployment folder of the test projects will also be updated, so that it only takes a refresh in the browser to view your changes.
 
 To keep source code formatting uniform across the project, run the following command to format all project source files (XML files are not supported):
 
@@ -79,7 +79,7 @@ To release the widget in the Mendix App Store, run the following command to buil
 npm run build
 ```
 
-The command will optimize the source code for production environment and generate a new mpk that will be included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk.
+The command will optimize the source code for production environment and generate a new mpk that will be included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk. The source files in the deployment folder of the test projects will also be updated, so that it only takes a refresh in the browser to check your production code.
 
 ## Contributing
 

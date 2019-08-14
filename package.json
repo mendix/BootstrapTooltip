@@ -21,6 +21,7 @@
     "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
     "file-loader": "^3.0.1",
+    "filemanager-webpack-plugin": "^2.0.5",
     "fs-extra": "^7.0.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
@@ -33,7 +34,6 @@
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "4.35.0",
-    "webpack-archive-plugin": "^3.0.0",
     "webpack-cli": "3.3.5",
     "xml-webpack-plugin": "0.0.2"
   },
