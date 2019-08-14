@@ -1,18 +1,10 @@
+const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const FileManagerPlugin = require("filemanager-webpack-plugin");
 const XMLPlugin = require("xml-webpack-plugin");
-const ArchivePlugin = require("webpack-archive-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const fs = require("fs-extra");
-const webpack = require("webpack");
 
-/*
- * 'xml-webpack-plugin' & 'webpack-archive-plugin' causing some webpack deprecations warnigns.
- * These warnings are safe to be ignored as we're in webpack 4, consider to periodically check if these
- * dependencies can be updated especially before going to webpack 5.
- * Uncomment the line below to be able to trace webpack deprecations.
- * Set 'process.noDeprecation' to 'false' to get deprecations trace printed to your cmd/terminal.
- */
 process.traceDeprecation = true;
 process.noDeprecation = true;
 
@@ -127,13 +119,10 @@ module.exports = {
         ]
     },
     externals: [/mx|mxui|mendix|dijit|dojo|require/],
-    plugins: _getPlugins()
+    plugins: initPlugins()
 };
 
-function _getPlugins() {
-    //ensure distDir for Archive Plugin
-    fs.ensureDirSync("./dist");
-
+function initPlugins() {
     const plugins = [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
@@ -142,28 +131,49 @@ function _getPlugins() {
         new XMLPlugin({
             files: widgetXMLFiles
         }),
-        new ArchivePlugin({
-            output: "./dist/BootstrapTooltip",
-            format: "zip",
-            ext: "mpk"
-        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
         })
     ];
 
-    const mxVersions = [6, 7, 8];
-    mxVersions.forEach(version => {
-        fs.ensureDirSync(`./test/mx-${version}/widgets`);
-        plugins.push(
-            new ArchivePlugin({
-                output: `./test/mx-${version}/widgets/BootstrapTooltip`,
-                format: "zip",
-                ext: "mpk"
-            })
-        );
-    });
+    initFileManagerPlugin(plugins);
 
     return plugins;
+}
+
+function initFileManagerPlugin(plugins) {
+    const mxTestProjectVersions = [6, 7, 8];
+
+    const mpkCopyCommands = mxTestProjectVersions.map(version => {
+        return {
+            source: "./dist/BootstrapTooltip.mpk",
+            destination: `./test/mx-${version}/widgets/`
+        };
+    });
+
+    const deploymentCopyCommands = mxTestProjectVersions.map(version => {
+        return {
+            source: "./dist/BootstrapTooltip/BootstrapTooltip/widget/",
+            destination: `./test/mx-${version}/deployment/web/widgets/BootstrapTooltip/widget/`
+        };
+    });
+
+    plugins.push(
+        new FileManagerPlugin({
+            onEnd: [
+                {
+                    archive: [
+                        {
+                            source: "./dist/BootstrapTooltip",
+                            destination: "./dist/BootstrapTooltip.mpk"
+                        }
+                    ]
+                },
+                {
+                    copy: mpkCopyCommands.concat(deploymentCopyCommands)
+                }
+            ]
+        })
+    );
 }
