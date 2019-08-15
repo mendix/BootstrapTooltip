@@ -87,7 +87,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
                     return this._tooltipText;
                 },
                 placement: this.tooltipLocation,
-                trigger: this._tooltipTrigger,
+                trigger: this._getTrigger(),
                 html: this.tooltipRenderHTML
             });
 
@@ -95,6 +95,14 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
         }
 
         this._executeCallback(cb, "_initializeTooltip");
+    },
+
+    _getTrigger: function() {
+        return this._tooltipTrigger === "hover" && this.isMobileDevice() ? "click" : this._tooltipTrigger;
+    },
+
+    isMobileDevice: function() {
+        return /(iPhone|iPod|iPad|Android|Windows Phone)/.test(navigator.userAgent);
     },
 
     _execMf: function(mf, guid, cb) {

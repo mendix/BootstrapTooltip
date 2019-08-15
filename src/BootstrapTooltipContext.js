@@ -3,8 +3,13 @@ import lang from "dojo/_base/lang";
 import _bootstrapTooltipWidget from "./BootstrapTooltip";
 
 export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_bootstrapTooltipWidget], {
+    _contextObj: null,
+
     update: function(obj, callback) {
         logger.debug(this.id + ".update");
+
+        this._contextObj = obj;
+        this._resetSubscriptions();
 
         var guid = obj ? obj.getGuid() : null;
         if (this.tooltipSource === "microflow") {
@@ -25,17 +30,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
             }
         } else if (this.tooltipSource === "attribute") {
             if (this.tooltipMessageAttribute !== "") {
-                if (obj.isEnum(this.tooltipMessageAttribute)) {
-                    this._tooltipText = obj.getEnumCaption(this.tooltipMessageAttribute);
-                } else {
-                    this._tooltipText = obj.get(this.tooltipMessageAttribute);
-                }
-
-                if (this._tooltipText == null || this._tooltipText === "") {
-                    this._tooltipText = this.tooltipMessageString;
-                }
-
-                this._initializeTooltip();
+                this.setTooltipTextAttribute();
             } else {
                 if (this.tooltipMessageString !== "") {
                     this._tooltipText = this.tooltipMessageString;
@@ -45,5 +40,39 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
         }
 
         callback();
+    },
+
+    _resetSubscriptions: function() {
+        logger.debug(this.id + "._resetSubscriptions");
+        this.unsubscribeAll();
+
+        if (this._contextObj) {
+            this.subscribe({
+                guid: this._contextObj.getGuid(),
+                callback: () => this.setTooltipTextAttribute()
+            });
+
+            this.subscribe({
+                guid: this._contextObj.getGuid(),
+                attr: this.tooltipMessageAttribute,
+                callback: () => this.setTooltipTextAttribute()
+            });
+        }
+    },
+
+    setTooltipTextAttribute: function() {
+        if (this._contextObj) {
+            if (this._contextObj.isEnum(this.tooltipMessageAttribute)) {
+                this._tooltipText = this._contextObj.getEnumCaption(this.tooltipMessageAttribute);
+            } else {
+                this._tooltipText = this._contextObj.get(this.tooltipMessageAttribute);
+            }
+        } else {
+            this._tooltipText = null;
+        }
+        if (this._tooltipText == null || this._tooltipText === "") {
+            this._tooltipText = this.tooltipMessageString;
+        }
+        this._initializeTooltip();
     }
 });
