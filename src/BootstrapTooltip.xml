@@ -34,7 +34,7 @@
         <property key="tooltipMode" type="enumeration" defaultValue="hover">
             <caption>Tooltip mode</caption>
             <category>Appearance</category>
-            <description>When to show the tooltip.</description>
+            <description>When to show the tooltip. On a mobile device the 'On hover', will be triggered on touch.</description>
             <enumerationValues>
                 <enumerationValue key="hover">On hover, focus</enumerationValue>
                 <enumerationValue key="focus">On focus</enumerationValue>
