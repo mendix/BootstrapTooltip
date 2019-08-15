@@ -9,6 +9,8 @@ test/mx-6/theme/
 test/mx-7/theme/
 test/mx-8/theme/styles/native
 test/mx-8/theme/styles/web/sass
+test/mx-8/theme/README.md
+test/mx-8/theme/styles.js
 test/*/userlib/
 test/mx-6/widgets/
 test/mx-7/widgets/
