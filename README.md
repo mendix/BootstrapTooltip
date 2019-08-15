@@ -37,7 +37,10 @@ Extra for Bootstrap Tooltip (Context):
 
 -   Locate the widget as close to the target element as possible. (Preferably next to it)
 -   When an element has a tooltip attached to it and needs to be conditionally visible, put both element and tooltip
-    together in a container and apply the visibility conditions to the container instead of the element.
+    together in a container and apply the visibility conditions to the container instead of the element (see the image
+    below).
+
+![Conditional visible container with target element and Bootstrap Tooltip inside](/assets/conditional-visibility.png)
 
 ## Features and limitations
 
@@ -53,14 +56,14 @@ To start development on the Bootstrap Tooltip:
 
 To install all project dependencies, execute the following comamnd in the terminal:
 
-```
+```shell
 npm install
 ```
 
 In order to test the widget with one of the supplied test projects, run the following command to generate and include an
 mpk file in every test project (and in a dist folder):
 
-```
+```shell
 npm start
 ```
 
@@ -72,7 +75,7 @@ takes a refresh in the browser to view your changes.
 To keep source code formatting uniform across the project, run the following command to format all project source files
 (XML files are not supported):
 
-```
+```shell
 npm run prettier:fix
 ```
 
@@ -80,7 +83,7 @@ npm run prettier:fix
 
 To release the widget in the Mendix App Store, run the following command to build the widget:
 
-```
+```shell
 npm run build
 ```
 

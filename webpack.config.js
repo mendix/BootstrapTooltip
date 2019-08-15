@@ -39,7 +39,7 @@ const widgetXMLFiles = [
 module.exports = {
     mode: isDev ? MODES.DEV : MODES.PROD,
     target: "web",
-    devtool: isDev ? "eval-source-map" : false,
+    devtool: isDev ? "source-map" : false,
     entry: {
         BootstrapTooltipContext: "./src/BootstrapTooltipContext.js",
         BootstrapTooltip: "./src/BootstrapTooltip.js"

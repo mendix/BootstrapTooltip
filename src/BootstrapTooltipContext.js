@@ -1,5 +1,4 @@
 import declare from "dojo/_base/declare";
-import lang from "dojo/_base/lang";
 import _bootstrapTooltipWidget from "./BootstrapTooltip";
 
 export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_bootstrapTooltipWidget], {
@@ -11,35 +10,24 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
         this._contextObj = obj;
         this._resetSubscriptions();
 
-        var guid = obj ? obj.getGuid() : null;
-        if (this.tooltipSource === "microflow") {
-            if (this.tooltipMessageMicroflow !== "") {
-                this._execMf(
-                    this.tooltipMessageMicroflow,
-                    guid,
-                    lang.hitch(this, function(string) {
-                        this._tooltipText = string;
-                        this._initializeTooltip();
-                    })
-                );
-            } else {
-                if (this.tooltipMessageString !== "") {
-                    this._tooltipText = this.tooltipMessageString;
-                }
-                this._initializeTooltip();
-            }
-        } else if (this.tooltipSource === "attribute") {
-            if (this.tooltipMessageAttribute !== "") {
-                this.setTooltipTextAttribute();
-            } else {
-                if (this.tooltipMessageString !== "") {
-                    this._tooltipText = this.tooltipMessageString;
-                }
-                this._initializeTooltip();
+        if (this.tooltipSource === "microflow" && this.tooltipMessageMicroflow) {
+            var guid = obj ? obj.getGuid() : null;
+            this._execMf(this.tooltipMessageMicroflow, guid, message => {
+                this._tooltipText = message;
+                this._initializeTooltip(callback);
+            });
+            return;
+        }
+
+        if (this.tooltipSource === "attribute" && this.tooltipMessageAttribute) {
+            this.setTooltipTextAttribute();
+        } else {
+            if (this.tooltipMessageString) {
+                this._tooltipText = this.tooltipMessageString;
             }
         }
 
-        callback();
+        this._initializeTooltip(callback);
     },
 
     _resetSubscriptions: function() {
@@ -73,6 +61,5 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
         if (this._tooltipText == null || this._tooltipText === "") {
             this._tooltipText = this.tooltipMessageString;
         }
-        this._initializeTooltip();
     }
 });
