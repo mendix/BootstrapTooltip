@@ -36,9 +36,7 @@ Extra for Bootstrap Tooltip (Context):
 ### Tips
 
 -   Locate the widget as close to the target element as possible. (Preferably next to it)
--   When an element has a tooltip attached to it and needs to be conditionally visible, put both element and tooltip
-    together in a container and apply the visibility conditions to the container instead of the element (see the image
-    below).
+-   When an element has a tooltip attached to it and needs to be conditionally visible, put both element and tooltip together in a container and apply the visibility conditions to the container instead of the element (see the image below).
 
 ![Conditional visible container with target element and Bootstrap Tooltip inside](/assets/conditional-visibility.png)
 
@@ -60,20 +58,15 @@ To install all project dependencies, execute the following comamnd in the termin
 npm install
 ```
 
-In order to test the widget with one of the supplied test projects, run the following command to generate and include an
-mpk file in every test project (and in a dist folder):
+In order to test the widget with one of the supplied test projects, run the following command to generate and include an mpk file in every test project (and in a dist folder):
 
 ```shell
 npm start
 ```
 
-This command will also watch the source code files. When changes to these files have been saved, a new mpk file will be
-generated and included in the dist folder and in every test project. The dist folder will also contain an unpacked
-version of the mpk. The source files in the deployment folder of the test projects will also be updated, so that it only
-takes a refresh in the browser to view your changes.
+This command will also watch the source code files. When changes to these files have been saved, a new mpk file will be generated and included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk. The source files in the deployment folder of the test projects will also be updated, so that it only takes a refresh in the browser to view your changes.
 
-To keep source code formatting uniform across the project, run the following command to format all project source files
-(XML files are not supported):
+To keep source code formatting uniform across the project, run the following command to format all project source files (XML files are not supported):
 
 ```shell
 npm run prettier:fix
@@ -87,12 +80,8 @@ To release the widget in the Mendix App Store, run the following command to buil
 npm run build
 ```
 
-The command will optimize the source code for production environment and generate a new mpk that will be included in the
-dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk. The source
-files in the deployment folder of the test projects will also be updated, so that it only takes a refresh in the browser
-to check your production code.
+The command will optimize the source code for production environment and generate a new mpk that will be included in the dist folder and in every test project. The dist folder will also contain an unpacked version of the mpk. The source files in the deployment folder of the test projects will also be updated, so that it only takes a refresh in the browser to check your production code.
 
 ## Contributing
 
-For more information on contributing to this repository visit
-[Contributing to a GitHub repository](https://world.mendix.com/display/howto50/Contributing+to+a+GitHub+repository)
+For more information on contributing to this repository visit [Contributing to a GitHub repository](https://world.mendix.com/display/howto50/Contributing+to+a+GitHub+repository)

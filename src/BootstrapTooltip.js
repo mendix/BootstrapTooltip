@@ -59,6 +59,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
                     this.domNode.id +
                     "')"
             );
+            return;
         }
 
         // if the element is a label+input combination, find the input element.
@@ -78,12 +79,15 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
                 trigger: this._getTrigger(),
                 html: this.tooltipRenderHTML
             });
+        } else {
+            window.logger.warn("Form input not available at the moment");
         }
 
         this._executeCallback(cb, "_initializeTooltip");
     },
 
-    // Translate hover trigger to click trigger on mobile devices
+    /* Convert a hover trigger to click trigger, because hovering on mobile touchscreen devices is not supported.
+    Devices with a pointing device and touchscreen will keep the hover trigger. */
     _getTrigger: function() {
         return this._tooltipTrigger === "hover" && this.isMobileDevice() ? "click" : this._tooltipTrigger;
     },
@@ -112,7 +116,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
                     cb(obj);
                 }
             },
-            error: error => console.log(this.id + "._execMf error: " + error.description)
+            error: error => console.log(this.id + "._execMf error: " + error)
         };
 
         mx.data.action(mfAction, this);
