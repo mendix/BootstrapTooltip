@@ -12,9 +12,7 @@ test/mx-8/theme/styles/web/sass
 test/mx-8/theme/README.md
 test/mx-8/theme/styles.js
 test/*/userlib/
-test/mx-6/widgets/
-test/mx-7/widgets/
-test/*/widgets/BootstrapTooltip.mpk
+test/*/widgets/
 test/*/.classpath
 test/*/.project
 test/*/*.launch
