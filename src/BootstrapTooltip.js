@@ -30,13 +30,13 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
         if (this.tooltipMessageMicroflow) {
             this._execMf(this.tooltipMessageMicroflow, obj ? obj.getGuid() : null, message => {
                 this._tooltipText = message;
-                this._initializeTooltip(callback);
+                setTimeout(() => this._initializeTooltip(callback), 10);
             });
         } else {
             if (this.tooltipMessageString) {
                 this._tooltipText = this.tooltipMessageString;
             }
-            this._initializeTooltip(callback);
+            setTimeout(() => this._initializeTooltip(callback), 10);
         }
     },
 
@@ -59,6 +59,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
                     this.domNode.id +
                     "')"
             );
+            cb();
             return;
         }
 
