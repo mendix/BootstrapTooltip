@@ -46,7 +46,12 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
         // Find element by classname in the same container (DOM level) as widget
         var $targetElement = $(this.domNode).siblings("." + this.tooltipClassName);
 
-        // No element found on same level, try to find target element on page
+        // No element found on same level, try to find target element on same parent
+        if ($targetElement.length === 0) {
+            $targetElement = $(this.domNode.parentNode).find("." + this.tooltipClassName);
+        }
+
+        // No element found on same level, try to find target element on same page
         if ($targetElement.length === 0) {
             $targetElement = $("." + this.tooltipClassName);
         }
