@@ -14,7 +14,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
             var guid = obj ? obj.getGuid() : null;
             this._execMf(this.tooltipMessageMicroflow, guid, message => {
                 this._tooltipText = message;
-                this._initializeTooltip(callback);
+                setTimeout(() => this._initializeTooltip(callback), 10);
             });
             return;
         }
@@ -27,7 +27,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
             }
         }
 
-        this._initializeTooltip(callback);
+        setTimeout(() => this._initializeTooltip(callback), 10);
     },
 
     _resetSubscriptions: function() {
