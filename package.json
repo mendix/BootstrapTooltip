@@ -1,6 +1,6 @@
 {
   "name": "BootstrapTooltip",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "This widget adds a tooltip to an user defined field, containing for example help text or extra information.",
   "license": "Apache-2.0",
   "author": "Mendix Technology B.V.",

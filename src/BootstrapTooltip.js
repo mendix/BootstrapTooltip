@@ -30,13 +30,13 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
         if (this.tooltipMessageMicroflow) {
             this._execMf(this.tooltipMessageMicroflow, obj ? obj.getGuid() : null, message => {
                 this._tooltipText = message;
-                setTimeout(() => this._initializeTooltip(callback), 10);
+                setTimeout(() => this._initializeTooltip(callback), 1000);
             });
         } else {
             if (this.tooltipMessageString) {
                 this._tooltipText = this.tooltipMessageString;
             }
-            setTimeout(() => this._initializeTooltip(callback), 10);
+            setTimeout(() => this._initializeTooltip(callback), 1000);
         }
     },
 
