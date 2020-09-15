@@ -77,14 +77,26 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
         }
 
         if ($targetElement.length > 0) {
-            $targetElement.tooltip({
-                title: () => {
-                    return this._tooltipText;
-                },
-                placement: this.tooltipLocation,
-                trigger: this._getTrigger(),
-                html: this.tooltipRenderHTML
-            });
+            try {
+                $targetElement.tooltip({
+                    title: () => {
+                        return this._tooltipText;
+                    },
+                    placement: this.tooltipLocation,
+                    trigger: this._getTrigger(),
+                    html: this.tooltipRenderHTML
+                });
+            } catch(e) {
+                console.warn(
+                    "Did you configure BootstrapTooltip widget correctly? Couldn't start tooltip methods in the element with class '" +
+                    this.tooltipClassName +
+                    "' on same level as widget (id='" +
+                    this.domNode.id +
+                    "')"
+                );
+                cb();
+                return;
+            }
         } else {
             window.logger.warn("Form input not available at the moment");
         }
