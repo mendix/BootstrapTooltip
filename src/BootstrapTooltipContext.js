@@ -1,5 +1,4 @@
 import declare from "dojo/_base/declare";
-import lang from "dojo/_base/lang";
 import _bootstrapTooltipWidget from "./BootstrapTooltip";
 
 export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_bootstrapTooltipWidget], {
@@ -49,13 +48,13 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
         if (this._contextObj) {
             this.subscribe({
                 guid: this._contextObj.getGuid(),
-                callback: lang.hitch(this, () => this.setTooltipTextAttribute())
+                callback: () => this.setTooltipTextAttribute()
             });
 
             this.subscribe({
                 guid: this._contextObj.getGuid(),
                 attr: this._attribute,
-                callback: lang.hitch(this, () => this.setTooltipTextAttribute())
+                callback: () => this.setTooltipTextAttribute()
             });
         }
     },
