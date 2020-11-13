@@ -3,6 +3,17 @@ import _bootstrapTooltipWidget from "./BootstrapTooltip";
 
 export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_bootstrapTooltipWidget], {
     _contextObj: null,
+    _attribute: "",
+
+    postCreate: function () {
+        const attributeSplit = this.tooltipMessageAttribute.split("/");
+        if (attributeSplit.length === 1) {
+            this._attribute = this.tooltipMessageAttribute;
+        } else {
+            this._attribute = attributeSplit[attributeSplit.length - 1];
+        }
+        this._checkTrigger();
+    },
 
     update: function(obj, callback) {
         logger.debug(this.id + ".update");
@@ -19,7 +30,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
             return;
         }
 
-        if (this.tooltipSource === "attribute" && this.tooltipMessageAttribute) {
+        if (this.tooltipSource === "attribute" && this._attribute) {
             this.setTooltipTextAttribute();
         } else {
             if (this.tooltipMessageString) {
@@ -42,7 +53,7 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
 
             this.subscribe({
                 guid: this._contextObj.getGuid(),
-                attr: this.tooltipMessageAttribute,
+                attr: this._attribute,
                 callback: () => this.setTooltipTextAttribute()
             });
         }
@@ -50,10 +61,10 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltipContext", [_boot
 
     setTooltipTextAttribute: function() {
         if (this._contextObj) {
-            if (this._contextObj.isEnum(this.tooltipMessageAttribute)) {
-                this._tooltipText = this._contextObj.getEnumCaption(this.tooltipMessageAttribute);
+            if (this._contextObj.isEnum(this._attribute)) {
+                this._tooltipText = this._contextObj.getEnumCaption(this._attribute);
             } else {
-                this._tooltipText = this._contextObj.get(this.tooltipMessageAttribute);
+                this._tooltipText = this._contextObj.get(this._attribute);
             }
         } else {
             this._tooltipText = null;
