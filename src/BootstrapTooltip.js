@@ -21,6 +21,10 @@ export default declare("BootstrapTooltip.widget.BootstrapTooltip", [_WidgetBase,
     postCreate: function() {
         logger.debug(this.id + ".postCreate");
 
+        this._checkTrigger();
+    },
+
+    _checkTrigger: function() {
         this._tooltipTrigger = this.tooltipMode === "hover" ? "focus hover" : this.tooltipMode;
     },
 
